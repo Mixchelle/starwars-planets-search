@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 header {
   display: flex;
   justify-content: center;
@@ -27,25 +22,22 @@ th, td {
 }
 
 form {
-  display: block;
-  align-items: flex-end;
-  display: flex;
-  justify-content: space-between;
-}
-
-.filter__name, .filter__remove {
-  margin: 0;
-}
-
-.filter__numeric, .filter__order {
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
 }
 
 .filter__name {
+  margin: 0;
   margin-right: 20px;
 }
+
+.filter__numeric {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .filter__column, .filter__comparison, .filter__number {
   width: 27%;
