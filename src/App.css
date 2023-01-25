@@ -7,6 +7,50 @@
   pointer-events: none;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.header__logo {
+  width: 250px;
+}
+
+.table {
+  color: white;
+  font-size: 0.8rem;
+}
+
+th, td {
+  vertical-align: middle;
+}
+
+form {
+  display: block;
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter__name, .filter__remove {
+  margin: 0;
+}
+
+.filter__numeric, .filter__order {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter__name {
+  margin-right: 20px;
+}
+
+.filter__column, .filter__comparison, .filter__number {
+  width: 27%;
+}
+
 @media ( prefers-reduced-motion : no-preference ) {
 
   .App-logo {

@@ -1,21 +1,9 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
+import useFetch from '../hooks/useFetch';
 
 export default function ProviderContext({ children }) {
-  const [planetsData, setplanetsData] = useState([]);
-
-  useEffect(() => {
-    const getApi = async () => {
-      const response = await fetch('https://swapi.dev/api/planets');
-      const data = await response.json();
-      data.results.forEach((planet) => {
-        delete planet.residents;
-      });
-      setplanetsData(data.results);
-    };
-    getApi();
-  }, []);
+  const { planetsData } = useFetch();
   return (
     <Context.Provider value={ { planetsData } }>
       { children }
@@ -24,9 +12,8 @@ export default function ProviderContext({ children }) {
 }
 
 ProviderContext.propTypes = {
-  children: PropTypes.element,
-};
-
-ProviderContext.defaultProps = {
-  children: <>default</>,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
