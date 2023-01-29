@@ -26,7 +26,7 @@ export default function Filter() {
           name="column"
           onChange={ handleChange }
         >
-      {optionsColumn
+          {optionsColumn
             .map((column) => (<option value={ column } key={ column }>{column}</option>))}
         </select>
         <p>comparação:</p>
