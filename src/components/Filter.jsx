@@ -9,6 +9,7 @@ export default function Filter() {
     handleChange,
     handleChangeName,
     filters,
+    optionsColumn,
     handleApplyFilters,
   } = useContext(context);
 
@@ -25,11 +26,8 @@ export default function Filter() {
           name="column"
           onChange={ handleChange }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+      {optionsColumn
+            .map((column) => (<option value={ column } key={ column }>{column}</option>))}
         </select>
         <p>comparação:</p>
         <select

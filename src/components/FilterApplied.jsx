@@ -3,11 +3,9 @@ import { context } from '../context/Context';
 
 export default function FilterApplied() {
   const { appliedFilters, handleEraseFilter } = useContext(context);
-  console.log('===========');
   console.log(appliedFilters);
-  console.log('=============');
   return (
-    <div>
+    <form>
       {appliedFilters?.map((filter) => (
         <div data-testid="filter" key={ filter.column }>
           <span data-testid="column">{filter.column}</span>
@@ -20,6 +18,6 @@ export default function FilterApplied() {
             clear
           </button>
         </div>))}
-    </div>
+    </form>
   );
 }
