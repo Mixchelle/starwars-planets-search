@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 
 export default function useFetch() {
-  const [planetsData, setplanetsData] = useState([]);
-
+  const [planetsData, setPlanetsData] = useState([]);
   useEffect(() => {
-    const getApi = async () => {
+    const fetchApi = async () => {
       const response = await fetch('https://swapi.dev/api/planets');
       const data = await response.json();
       data.results.forEach((planet) => {
         delete planet.residents;
       });
-      setplanetsData(data.results);
+      setPlanetsData(data.results);
     };
-    getApi();
+    fetchApi();
   }, []);
   return { planetsData };
 }

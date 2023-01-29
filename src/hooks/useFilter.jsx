@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
+import { context } from '../context/Context';
 
 const colunas = ['population',
   'orbital_period',
@@ -10,10 +11,11 @@ const INITIAL_STATE = {
   column: 'population',
   comparison: 'maior que',
   value: 0,
+  order: { column: 'population', sort: 'ASC' },
 };
 
-function useFilter(dataFetch) {
-  const [filteredPlanets, setFilteredPlanets] = useState(dataFetch);
+export default function useFilter() {
+  const { filteredPlanets, setFilteredPlanets } = useContext(context);
   const [textFilterInput, setTextFilterInput] = useState('');
   const [optionsColumn, setOptionsColumn] = useState(colunas);
   const [appliedFilters, setAppliedFilters] = useState([]);
@@ -24,25 +26,6 @@ function useFilter(dataFetch) {
   const handleChange = ({ target: { value, name } }) => {
     setFilters((oldFilters) => ({ ...oldFilters, [name]: value }));
   };
-
-  useEffect(() => {
-    if (textFilterInput === '') {
-      setFilteredPlanets(dataFetch);
-    } else if (textFilterInput) {
-      setFilteredPlanets((data) => data
-        .filter(({ name }) => name.toLowerCase()
-          .includes(textFilterInput.toLowerCase())));
-    } else {
-      setFilteredPlanets('');
-    }
-  }, [dataFetch, textFilterInput]);
-
-  useEffect(() => {
-    setFilters((oldFilters) => ({
-      ...oldFilters,
-      column: optionsColumn[0],
-    }));
-  }, [optionsColumn]);
 
   const handleApplyFilters = () => {
     setAppliedFilters((oldFilters) => [...oldFilters, filters]);
@@ -55,6 +38,28 @@ function useFilter(dataFetch) {
       setOptionsColumn((columns) => [...columns, filter.column]),
     );
   };
+
+  const handleSort = ({ target: { value, name } }) => {
+    setFilters({
+      ...filters,
+      order: {
+        ...filters.order,
+        [name]: value,
+      },
+    });
+  };
+
+  const handleClickSort = () => {
+    const { order: { column, sort } } = filters;
+    const known = filteredPlanets.filter((planet) => planet[column] !== 'unknown');
+    const unknown = filteredPlanets.filter((planet) => planet[column] === 'unknown');
+    const sortedArr = known.sort((a, b) => ((sort === 'ASC')
+      ? Number(a[column]) - Number(b[column])
+      : Number(b[column]) - Number(a[column])));
+    const sortedPlanets = [...sortedArr, ...unknown];
+    setFilteredPlanets(sortedPlanets);
+  };
+
   const handleCleanAllFilters = () => {
     setAppliedFilters([], setOptionsColumn([
       'population',
@@ -65,18 +70,18 @@ function useFilter(dataFetch) {
   };
 
   return {
-    setFilteredPlanets,
-    appliedFilters,
-    filteredPlanets,
     textFilterInput,
-    handleChangeName,
-    filters,
-    handleChange,
     optionsColumn,
-    handleCleanAllFilters,
-    handleEraseFilter,
+    appliedFilters,
+    handleChangeName,
+    handleChange,
     handleApplyFilters,
+    handleEraseFilter,
+    handleCleanAllFilters,
+    filters,
+    setOptionsColumn,
+    setFilters,
+    handleSort,
+    handleClickSort,
   };
 }
-
-export default useFilter;

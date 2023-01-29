@@ -24,7 +24,7 @@ th, td {
 form {
   align-items: flex-end;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .filter__name {
