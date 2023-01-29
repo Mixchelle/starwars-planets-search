@@ -1,19 +1,81 @@
-function useFilter() {
-  const filterByName = (array, search) => array.filter(({ name }) => name.toUpperCase()
-    .includes(search.toUpperCase()));
+import { useState, useEffect } from 'react';
 
-  const filterByNumbers = (
-    { columnForFilter, comparison, value },
-    array,
-  ) => array.filter((planet) => ({
-    iguala: Number(value) === Number(planet[columnForFilter]),
-    maiorque: Number(value) < Number(planet[columnForFilter]),
-    menorque: Number(value) > Number(planet[columnForFilter]),
-  })[comparison.replace(' ', '')]);
+const colunas = ['population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water'];
+
+const INITIAL_STATE = {
+  column: 'population',
+  comparison: 'maior que',
+  value: 0,
+};
+
+function useFilter(dataFetch) {
+  const [filteredPlanets, setFilteredPlanets] = useState(dataFetch);
+  const [textFilterInput, setTextFilterInput] = useState('');
+  const [optionsColumn, setOptionsColumn] = useState(colunas);
+  const [appliedFilters, setAppliedFilters] = useState([]);
+  const [filters, setFilters] = useState(INITIAL_STATE);
+
+  const handleChangeName = ({ target: { value } }) => setTextFilterInput(value);
+
+  const handleChange = ({ target: { value, name } }) => {
+    setFilters((oldFilters) => ({ ...oldFilters, [name]: value }));
+  };
+
+  useEffect(() => {
+    if (textFilterInput === '') {
+      setFilteredPlanets(dataFetch);
+    } else if (textFilterInput) {
+      setFilteredPlanets((data) => data
+        .filter(({ name }) => name.toLowerCase()
+          .includes(textFilterInput.toLowerCase())));
+    } else {
+      setFilteredPlanets('');
+    }
+  }, [dataFetch, textFilterInput]);
+
+  useEffect(() => {
+    setFilters((oldFilters) => ({
+      ...oldFilters,
+      column: optionsColumn[0],
+    }));
+  }, [optionsColumn]);
+
+  const handleApplyFilters = () => {
+    setAppliedFilters((oldFilters) => [...oldFilters, filters]);
+  };
+
+  const handleEraseFilter = (filter) => {
+    setAppliedFilters(
+      (oldFilters) => oldFilters
+        .filter((oldFilter) => oldFilter !== filter),
+      setOptionsColumn((columns) => [...columns, filter.column]),
+    );
+  };
+  const handleCleanAllFilters = () => {
+    setAppliedFilters([], setOptionsColumn([
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water']));
+  };
 
   return {
-    filterByName,
-    filterByNumbers,
+    setFilteredPlanets,
+    appliedFilters,
+    filteredPlanets,
+    textFilterInput,
+    handleChangeName,
+    filters,
+    handleChange,
+    optionsColumn,
+    handleCleanAllFilters,
+    handleEraseFilter,
+    handleApplyFilters,
   };
 }
 

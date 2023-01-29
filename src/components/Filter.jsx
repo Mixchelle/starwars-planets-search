@@ -1,14 +1,47 @@
+import { useContext } from 'react';
+import Context from '../context/Context';
+
 export default function Filter() {
+  const {
+    textFilterInput,
+    handleChangeName,
+    filters,
+    handleChange,
+    optionsColumn,
+    handleApplyFilters,
+    handleCleanAllFilters,
+  } = useContext(Context);
+
   return (
     <form>
-      <select data-testid="column-filter" className="filter__numeric">
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+      <section>
+        <label htmlFor="name-filter">
+          Filtro
+          <input
+            type="text"
+            id="name-filter"
+            className="filter__name"
+            data-testid="name-filter"
+            value={ textFilterInput }
+            onChange={ handleChangeName }
+          />
+        </label>
+      </section>
+      <select
+        data-testid="column-filter"
+        className="filter__numeric"
+        value={ filters.column }
+        onChange={ handleChange }
+      >
+        {optionsColumn
+          .map((column) => (<option value={ column } key={ column }>{column}</option>))}
       </select>
-      <select data-testid="comparison-filter" className="filter__comparison">
+      <select
+        data-testid="comparison-filter"
+        className="filter__comparison"
+        value={ filters.comparison }
+        onChange={ handleChange }
+      >
         <option value="maior que">maior que</option>
         <option value="menor que">menor que</option>
         <option value="igual a<">igual a</option>
@@ -17,12 +50,21 @@ export default function Filter() {
         data-testid="value-filter"
         type="number"
         className="filter__number"
+        value={ filters.value }
+        onChange={ handleChange }
       />
       <button
         data-testid="button-filter"
         className="filter__remove"
+        onClick={ handleApplyFilters }
       >
         Filtrar
+      </button>
+      <button
+        data-testid="button-remove-filters"
+        onClick={ handleCleanAllFilters }
+      >
+        Excluir filtros
       </button>
     </form>
   );
