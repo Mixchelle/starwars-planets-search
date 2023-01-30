@@ -3,7 +3,6 @@ import { context } from '../context/Context';
 
 export default function FilterApplied() {
   const { appliedFilters, handleEraseFilter } = useContext(context);
-  console.log(appliedFilters);
   return (
     <div>
       {appliedFilters?.map((filter) => (

@@ -58,7 +58,7 @@ export default function ProviderContext({ children }) {
     } else {
       setFilteredPlanets(planetsData);
     }
-  }, [planetsData, textFilterInput, appliedFilters, filters, setOptionsColumn]);
+  }, [planetsData, textFilterInput, appliedFilters]);
 
   useEffect(() => {
     setFilters((oldFilters) => ({

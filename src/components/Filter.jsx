@@ -13,8 +13,6 @@ export default function Filter() {
     handleApplyFilters,
   } = useContext(context);
 
-  console.log(filters);
-
   return (
     <div>
       <form>
