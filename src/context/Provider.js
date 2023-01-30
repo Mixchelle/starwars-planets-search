@@ -5,9 +5,9 @@ import useFetch from '../hooks/useFetch';
 
 const colunas = [
   'population',
+  'rotation_period',
   'orbital_period',
   'diameter',
-  'rotation_period',
   'surface_water',
 ];
 
