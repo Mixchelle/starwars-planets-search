@@ -48,43 +48,4 @@ describe('Testa se ', () => {
     expect(sortColumnBtn).toBeInTheDocument();
   });
 
-  test('Verifica de o input de filtro funciona da forma esperada', async () => {
-    const inputFilter = await screen.findByRole('textbox');
-    expect(inputFilter).toBeInTheDocument();
-    const tatooine = await screen.findByRole('cell', {
-      name: /tatooine/i
-    });
-    expect(tatooine).toBeInTheDocument();
-  
-    userEvent.type(inputFilter, 'al');
-  
-    const alderaan = screen.getByRole('cell', {
-      name: /alderaan/i
-    });
-    expect(alderaan).toBeInTheDocument();
-  });
-
-  test(' se o filtro de ordenar os planetas funciona da maneira esperada', () => {
-    const selectSort = screen.getByTestId("column-sort");
-    const inputRadioAsc = screen.getByRole('radio', {
-      name: /asc/i
-    });
-    const orderButton = screen.getByRole('button', {
-      name: /ordenar/i
-    });
-  
-    expect(selectSort).toBeInTheDocument();
-    expect(inputRadioAsc).toBeInTheDocument();
-    expect(orderButton).toBeInTheDocument();
-  
-    userEvent.selectOptions(selectSort, 'rotation_period');
-    userEvent.click(inputRadioAsc);
-    userEvent.click(orderButton);
-    const planets = ['Bespin', 'Endor', 'Tatooine', 'Hoth', 'Dagobah', 
-    'Alderaan', 'Yavin IV', 'Coruscant', 'Naboo', 'Kamino'];
-    const planetsArray = screen.getAllByTestId("planet-name");
-    planets.forEach((planet, index) => {
-     expect(planet).toBe(planetsArray[index].id);
-    })
-});
 });

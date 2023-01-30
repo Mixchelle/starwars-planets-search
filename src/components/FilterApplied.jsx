@@ -5,7 +5,7 @@ export default function FilterApplied() {
   const { appliedFilters, handleEraseFilter } = useContext(context);
   console.log(appliedFilters);
   return (
-    <form>
+    <div>
       {appliedFilters?.map((filter) => (
         <div data-testid="filter" key={ filter.column }>
           <span data-testid="column">{filter.column}</span>
@@ -13,11 +13,11 @@ export default function FilterApplied() {
           <span data-testid="value">{filter.value}</span>
           <button
             onClick={ () => handleEraseFilter(filter) }
-            data-testid="button"
+            data-testid="button-remove-filters"
           >
-            clear
+            X
           </button>
         </div>))}
-    </form>
+    </div>
   );
 }

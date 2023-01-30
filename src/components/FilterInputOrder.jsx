@@ -2,9 +2,14 @@ import React, { useContext } from 'react';
 import { context } from '../context/Context';
 
 export default function FilterInputOrder() {
-  const { filters, handleSort, handleClickSort } = useContext(context);
+  const {
+    filters,
+    handleSort,
+    handleClickSort,
+  } = useContext(context);
+
   return (
-    <form>
+    <div>
       <select
         className="dropdown-html"
         name="column"
@@ -54,6 +59,6 @@ export default function FilterInputOrder() {
       >
         Ordenar
       </button>
-    </form>
+    </div>
   );
 }

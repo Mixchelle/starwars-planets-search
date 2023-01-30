@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 import { context } from '../context/Context';
+import Header from './Header';
+import Filter from './Filter';
+import FilterInputOrder from './FilterInputOrder';
 
 export default function Table() {
   const { filteredPlanets } = useContext(context);
@@ -23,7 +26,10 @@ export default function Table() {
   ));
   return (
     <div>
-      <table>
+      <Header />
+      <Filter />
+      <FilterInputOrder />
+      <table data-testid="table">
         <thead>
           <tr>
             <th>Name</th>
