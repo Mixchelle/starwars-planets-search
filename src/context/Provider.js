@@ -65,7 +65,7 @@ export default function ProviderContext({ children }) {
       ...oldFilters,
       column: optionsColumn[0],
     }));
-  }, [optionsColumn, setFilters]);
+  }, [optionsColumn, ]);
 
   const handleChangeName = ({ target: { value } }) => setTextFilterInput(value);
 

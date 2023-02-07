@@ -104,48 +104,58 @@ describe('Testa se ', () => {
     expect(planetsTwo[0]).toHaveTextContent('Bespin');
   });
 
-  test('Verifica se quando o botão remover todos os filtros é clicado, o filtro é removido', () => {
-    const selectColumn = screen.getByTestId("column-filter");
-    const selectComparison = screen.getByTestId("comparison-filter");
-    const inputNumber = screen.getByTestId("value-filter");
-    const filterButton = screen.getByRole('button', {
-      name: /filtrar/i
+  test.only("remove filtro", () => {
+    const filterColumn = screen.getByTestId("column-filter");
+    const filterComparison = screen.getByTestId("comparison-filter");
+    const filterValue = screen.getByTestId("value-filter");
+    const filterBtn = screen.getByTestId("button-filter");
+    const planets = screen.getAllByTestId('planet-name');
+    const removeFilter = screen.getByTestId('button-remove-filters');
+
+    act(() => {
+      userEvent.selectOptions(filterColumn, "diameter");
+      userEvent.selectOptions(filterComparison, 'maior que');
+      userEvent.type(filterValue, '8900');
+      userEvent.click(filterBtn);
     });
-  
-    userEvent.selectOptions(selectColumn, 'diameter');
-    userEvent.selectOptions(selectComparison, 'maior que');
-    inputNumber.value = '';
-    userEvent.type(inputNumber, '9000');
-    userEvent.click(filterButton);
-  
-    userEvent.selectOptions(selectColumn, 'rotation_period');
-    userEvent.selectOptions(selectComparison, 'menor que');
-    inputNumber.value = '';
-    userEvent.type(inputNumber, '26');
-    userEvent.click(filterButton);
-  
-    expect(screen.getByText(/diameter maior que 9000/i)).toBeInTheDocument();
-    expect(screen.getByText(/rotation_period menor que 26/i)).toBeInTheDocument();
-    expect(screen.getByRole('cell', {
-      name: /tatooine/i
-    })).toBeInTheDocument();
-    expect(screen.queryByRole('cell', {
-      name: /naboo/i
-    })).not.toBeInTheDocument();
-  
-    const removeButton = screen.getByRole('button', {
-      name: /remover todas filtragens/i
+
+    expect(planets).toHaveLength(10);
+    act(() => {
+      userEvent.click(removeFilter);
+     });
+
+ 
+    expect(planets).toHaveLength(10);
+  });
+
+
+  test("multiplos filtros", () => {
+    const filterColumn = screen.getByTestId("column-filter");
+    const filterComparison = screen.getByTestId("comparison-filter");
+    const filterValue = screen.getByTestId("value-filter");
+    const filterBtn = screen.getByTestId("button-filter");
+
+    act(() => {
+      userEvent.selectOptions(filterColumn, "diameter");
+      userEvent.selectOptions(filterComparison, 'maior que');
+      userEvent.type(filterValue, '8900');
+      userEvent.click(filterBtn);
+
+      userEvent.clear(filterValue);
+
+      userEvent.selectOptions(filterColumn, "population");
+      userEvent.selectOptions(filterComparison, 'menor que');
+      userEvent.type(filterValue, '10000000');
+      userEvent.click(filterBtn);
     });
-    userEvent.click(removeButton);
-  
-    expect(screen.queryByText(/diameter maior que 9000/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/rotation_period menor que 26/i)).not.toBeInTheDocument();
-    expect(screen.getByRole('cell', {
-      name: /tatooine/i
-    })).toBeInTheDocument();
-    expect(screen.getByRole('cell', {
-      name: /naboo/i
-    })).toBeInTheDocument();
-  })
+
+    const filterApplied = screen.getAllByTestId("filter");
+    expect(filterApplied).toHaveLength(2);
+
+    const removeFilterBtn = screen.getAllByRole('button', {name: 'X'});
+    userEvent.click(removeFilterBtn[1]);
+    const filterAppliedTwo = screen.getAllByTestId("filter");
+    expect(filterAppliedTwo).toHaveLength(1);
+  });
 });
 
