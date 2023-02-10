@@ -4,7 +4,7 @@ import mockFetch from '../mocks/fetch';
 import testData from '../mocks/testData';
 import { BUTTON_REMOVE_FILTERS, FILTER } from '../utils/dataTestIds';
 
-const TOTAL_ROWS_COUNT = testData.results.length + 1;
+const TOTAL_ROWS_COUNT = testData.results.length +1;
 const FILTERED_ROWS_COUNT = 8;
 const DOUBLE_FILTERED = 3;
 const TRIPLE_FILTERED = 2;

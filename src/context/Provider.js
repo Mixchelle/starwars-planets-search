@@ -61,8 +61,8 @@ export default function ProviderContext({ children }) {
   }, [planetsData, textFilterInput, appliedFilters]);
 
   useEffect(() => {
-    setFilters((oldFilters) => ({
-      ...oldFilters,
+    setFilters((prevState) => ({
+      ...prevState,
       column: optionsColumn[0],
     }));
   }, [optionsColumn, ]);
@@ -70,17 +70,16 @@ export default function ProviderContext({ children }) {
   const handleChangeName = ({ target: { value } }) => setTextFilterInput(value);
 
   const handleChange = ({ target: { value, name } }) => {
-    setFilters((oldFilters) => ({ ...oldFilters, [name]: value }));
+    setFilters((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleApplyFilters = () => {
-    setAppliedFilters((oldFilters) => [...oldFilters, filters]);
+    setAppliedFilters((prevState) => [...prevState, filters]);
   };
 
   const handleEraseFilter = (filter) => {
     setAppliedFilters(
-      (oldFilters) => oldFilters
-        .filter((oldFilter) => oldFilter !== filter),
+      (prevState) => prevState.filter((oldState) => oldState !== filter),
       setOptionsColumn((columns) => [...columns, filter.column]),
     );
   };
