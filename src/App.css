@@ -2,13 +2,15 @@ body {
   margin: 0%;
   align-items: flex-end;
   background-color: rgb(246, 242, 242);
+  color: white;
 }
 
 header {
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  background-color: rgb(44, 43, 43);
+  color: white;
+  background-color: black;
 }
 
 .header__logo {
@@ -19,7 +21,10 @@ header {
   justify-items: center;
   justify-content: space-between;
   align-items: center;
-  width: auto;
+  width: 100%;
+  background-color: black;
+  padding: 20px;
+  color: white;
 }
 
 .select_sort{
@@ -33,8 +38,11 @@ header {
   /* or 129% */
   display: flex;
   align-items: center;
+  color: white;
 }
 .form-check-label{
+  background-color: #0a0a0a;
+  color: white;
   width: 82.44px;
   height: 25.1px;  
   font-family: 'Epilogue';
@@ -45,24 +53,31 @@ header {
   /* or 129% */
   display: flex;
   align-items: center;
+  color: white;
 }
 
 table{
+border: solid #FFFFFF;
  text-align: center;
- color: rgb(5, 4, 3);
+ color: black;
 padding: auto;
 width: 80%;
+background-color: black;
+color: white;
 }
 .filtertext{
   display: flex;
   justify-content: center;
   padding: 30px;
+  background-color: black;
+  color: white;
 
 }
 form {
   align-items: center;
   display: flex;
   justify-content: space-between;
+
 }
 .intro{
   background-color: black;
@@ -79,6 +94,8 @@ form {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  background-color: black;
+  color: white;
 }
 
 
@@ -91,8 +108,12 @@ border: 1px solid #0a0a0a;
 border-radius: 20px;
 }
 
-th, td {
+th {
   vertical-align: middle;
+  background-color:yellow ;
+  color: #0a0a0a;
+  font-size: large;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .filter__name {
@@ -200,12 +221,11 @@ align-items: center;
 
 .btnFilter{
   box-sizing: border-box;
+  padding: 12px;
+  margin: 10%;
 
-width: 91px;
-height: 85px;
-left: 592px;
-
-
+width: 71px;
+height: 65px;
 border: 1px solid #FAE60A;
 border-radius: 5px;
 }
