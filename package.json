@@ -1,4 +1,9 @@
 {
+  "homepage": "https://username.github.io/app-toot-name",
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+},
   "name": "sd-0x-project-react-context-hooks-starwars-datatable-filters",
   "version": "0.1.0",
   "private": true,
