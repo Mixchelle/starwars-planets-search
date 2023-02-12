@@ -1,13 +1,10 @@
 import React, { useContext } from 'react';
 import { context } from '../context/Context';
-import FilterApplie from './FilterApplied';
 
 export default function Filter() {
   const {
     handleCleanAllFilters,
-    textFilterInput,
     handleChange,
-    handleChangeName,
     filters,
     optionsColumn,
     handleApplyFilters,
@@ -16,7 +13,7 @@ export default function Filter() {
   return (
     <div>
       <form>
-        <p>Coluna:</p>
+        <p className="coluna">Coluna:</p>
         <select
           data-testid="column-filter"
           className="filter__numeric"
@@ -27,7 +24,7 @@ export default function Filter() {
           {optionsColumn
             .map((column) => (<option value={ column } key={ column }>{column}</option>))}
         </select>
-        <p>comparação:</p>
+        <p className="compare">comparação:</p>
         <select
           data-testid="comparison-filter"
           className="filter__comparison"
@@ -49,31 +46,21 @@ export default function Filter() {
           name="value"
           onChange={ handleChange }
         />
-        <button data-testid="button-filter" type="button" onClick={ handleApplyFilters }>
+        <button
+          className="btnFilter"
+          data-testid="button-filter"
+          type="button"
+          onClick={ handleApplyFilters }
+        >
           Filtrar
         </button>
-        <FilterApplie />
         <button
+          className="btnFilter"
           data-testid="button-remove-filters"
           onClick={ handleCleanAllFilters }
         >
           Excluir filtros
         </button>
-      </form>
-      <form>
-        <section>
-          <label htmlFor="name-filter">
-            Filtro
-            <input
-              type="text"
-              id="name-filter"
-              className="filter__name"
-              data-testid="name-filter"
-              value={ textFilterInput }
-              onChange={ handleChangeName }
-            />
-          </label>
-        </section>
       </form>
     </div>
   );

@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { context } from '../context/Context';
-import Header from './Header';
 import Filter from './Filter';
 import FilterInputOrder from './FilterInputOrder';
+import FilterApplied from './FilterApplied';
+import FilterText from './FilterTexr';
 
 export default function Table() {
   const { filteredPlanets } = useContext(context);
@@ -18,19 +19,22 @@ export default function Table() {
       <td>{planet.terrain}</td>
       <td>{planet.surface_water}</td>
       <td>{planet.population}</td>
-      <td>{planet.films.map((film) => <span key={ film }>{film}</span>)}</td>
       <td>{planet.created}</td>
       <td>{planet.edited}</td>
       <td>{planet.url}</td>
+      <td>{planet.films.map((film) => <span key={ film }>{film}</span>)}</td>
     </tr>
   ));
   return (
-    <div>
-      <Header />
-      <Filter />
-      <FilterInputOrder />
+    <div className="tabela">
+      <FilterText />
+      <div className="filtros">
+        <Filter />
+        <FilterInputOrder />
+        <FilterApplied />
+      </div>
       <table data-testid="table">
-        <thead>
+        <thead className="headTable">
           <tr>
             <th>Name</th>
             <th>Rotation Period</th>
@@ -41,10 +45,10 @@ export default function Table() {
             <th>Terrain</th>
             <th>Surface Water</th>
             <th>Population</th>
-            <th>Films</th>
             <th>Created</th>
             <th>Edited</th>
             <th>URL</th>
+            <th>Films</th>
           </tr>
         </thead>
         <tbody>

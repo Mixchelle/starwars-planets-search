@@ -104,31 +104,26 @@ describe('Testa se ', () => {
     expect(planetsTwo[0]).toHaveTextContent('Bespin');
   });
 
-  test.only("remove filtro", () => {
+  test("remove filtro", () => {
     const filterColumn = screen.getByTestId("column-filter");
     const filterComparison = screen.getByTestId("comparison-filter");
     const filterValue = screen.getByTestId("value-filter");
     const filterBtn = screen.getByTestId("button-filter");
-    const planets = screen.getAllByTestId('planet-name');
-    const removeFilter = screen.getByTestId('button-remove-filters');
-   
-    act(() => { 
+
+    act(() => {
       userEvent.selectOptions(filterColumn, "diameter");
       userEvent.selectOptions(filterComparison, 'maior que');
       userEvent.type(filterValue, '8900');
       userEvent.click(filterBtn);
     });
-
+    const planets = screen.getAllByTestId('planet-name');
     expect(planets).toHaveLength(7);
 
-    act(() => {
-      userEvent.click(removeFilter);
-     });
-
-
-    // expect(planets).toHaveLength(7);
+    const removeFilter = screen.getByTestId('button-remove-filters');
+    userEvent.click(removeFilter);
+    const planet = screen.getAllByTestId('planet-name');
+    expect(planet).toHaveLength(10);
   });
-
 
   test("multiplos filtros", () => {
     const filterColumn = screen.getByTestId("column-filter");
@@ -148,15 +143,22 @@ describe('Testa se ', () => {
       userEvent.selectOptions(filterComparison, 'menor que');
       userEvent.type(filterValue, '10000000');
       userEvent.click(filterBtn);
+
+      userEvent.clear(filterValue);
+
+      userEvent.selectOptions(filterColumn, "rotation_period");
+      userEvent.selectOptions(filterComparison, 'igual a');
+      userEvent.type(filterValue, '23');
+      userEvent.click(filterBtn);
     });
 
     const filterApplied = screen.getAllByTestId("filter");
-    expect(filterApplied).toHaveLength(2);
+    expect(filterApplied).toHaveLength(3);
  
     const removeFilterBtn = screen.getAllByRole('button', {name: 'X'});
     userEvent.click(removeFilterBtn[1]);
     const filterAppliedTwo = screen.getAllByTestId("filter");
-    expect(filterAppliedTwo).toHaveLength(1);
+    expect(filterAppliedTwo).toHaveLength(2);
   });
 });
 

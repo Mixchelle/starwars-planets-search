@@ -9,9 +9,9 @@ export default function FilterInputOrder() {
   } = useContext(context);
 
   return (
-    <div>
+    <div className="sort">
       <select
-        className="dropdown-html"
+        className="select_sort"
         name="column"
         value={ filters.order.column }
         data-testid="column-sort"
@@ -23,8 +23,8 @@ export default function FilterInputOrder() {
         <option value="rotation_period">rotation_period</option>
         <option value="surface_water">surface_water</option>
       </select>
+      <p>Ordem:</p>
       <div className="form-check">
-        <p>Ordem:</p>
         <label className="form-check-label" htmlFor="ASC">
           <input
             className="form-check-input"
@@ -35,7 +35,7 @@ export default function FilterInputOrder() {
             data-testid="column-sort-input-asc"
             onChange={ handleSort }
           />
-          ASC
+          Ascendente
         </label>
         <br />
         <label className="form-check-label" htmlFor="DESC">
@@ -48,11 +48,11 @@ export default function FilterInputOrder() {
             data-testid="column-sort-input-desc"
             onChange={ handleSort }
           />
-          DESC
+          Decrescente
         </label>
       </div>
       <button
-        className="btn btn-sm btn-primary"
+        className="btnFilter"
         type="button"
         data-testid="column-sort-button"
         onClick={ handleClickSort }

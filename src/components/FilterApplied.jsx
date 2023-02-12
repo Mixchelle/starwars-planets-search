@@ -6,11 +6,13 @@ export default function FilterApplied() {
   return (
     <div>
       {appliedFilters?.map((filter, i) => (
-        <section data-testid="filter" key={ i }>
+        <section data-testid="filter" key={ i } className="filter__bar">
           <span data-testid="column">{filter.column}</span>
           <span data-testid="comparison">{filter.comparison}</span>
           <span data-testid="value">{filter.value}</span>
           <button
+            data-testid="x"
+            className="filter__text"
             onClick={ () => handleEraseFilter(filter) }
           >
             X
