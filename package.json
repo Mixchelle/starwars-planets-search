@@ -2,7 +2,7 @@
   "homepage": "https://username.github.io/app-toot-name",
 "scripts": {
   "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
+  "deploy": "gh-pages -d build"
 },
   "name": "sd-0x-project-react-context-hooks-starwars-datatable-filters",
   "version": "0.1.0",
@@ -23,17 +23,6 @@
     "collectCoverageFrom": [
       "!src/index.js"
     ]
-  },
-  "scripts": {
-    "cy": "env CY_CLI=true cypress run",
-    "cy:open": "cypress open --e2e --browser chrome",
-    "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test-coverage": "react-scripts test --coverage --watchAll=false",
-    "eject": "react-scripts eject",
-    "lint:styles": "npx stylelint '**/*.css'",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx"
   },
   "eslintConfig": {
     "extends": "react-app"
