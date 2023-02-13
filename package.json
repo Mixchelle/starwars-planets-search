@@ -1,13 +1,18 @@
 {
   "homepage": "https://username.github.io/app-toot-name",
-"scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+  "scripts": {
     "predeploy": "npm run build",
-    "deploy:": "gh-pages -d build"
-},
+    "deploy": "gh-pages -d build",
+    "cy": "env CY_CLI=true cypress run",
+    "cy:open": "cypress open --e2e --browser chrome",
+    "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test-coverage": "react-scripts test --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint:styles": "npx stylelint '**/*.css'",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx"
+  },
   "name": "sd-0x-project-react-context-hooks-starwars-datatable-filters",
   "version": "0.1.0",
   "private": true,
@@ -22,7 +27,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1"
-  },
+  }, 
   "jest": {
     "collectCoverageFrom": [
       "!src/index.js"
@@ -44,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "gh": "^2.8.6",  
+    "pages": "0.0.16" ,
     "@sheerun/mutationobserver-shim": "0.3.3",
     "cypress": "^10.11.0",
     "cypress-multi-reporters": "^1.6.2",
