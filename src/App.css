@@ -15,6 +15,7 @@ header {
 
 .header__logo {
   width: 250px;
+  opacity: 40%;
 }
 .filtros{
   display: flex;
@@ -28,6 +29,7 @@ header {
 }
 
 .select_sort{
+  
   width: 82.44px;
   height: 25.1px;  
   font-family: 'Epilogue';
@@ -38,7 +40,7 @@ header {
   /* or 129% */
   display: flex;
   align-items: center;
-  color: white;
+  color: rgb(10, 9, 9);
 }
 .form-check-label{
   background-color: #0a0a0a;
@@ -57,11 +59,11 @@ header {
 }
 
 table{
-border: solid #FFFFFF;
+  overflow-x:auto;
+  height: 60%;
  text-align: center;
- color: black;
-padding: auto;
-width: 80%;
+ color: rgb(227, 224, 224);
+width: 10px;
 background-color: black;
 color: white;
 }
@@ -79,6 +81,15 @@ form {
   justify-content: space-between;
 
 }
+
+td {
+  height: 50px;
+  vertical-align: bottom;
+  border-bottom: 1px solid #ddd;
+}
+tr:hover {background-color: coral;}
+tr:nth-child(even) {background-color: #242323;}
+
 .intro{
   background-color: black;
   display: flex;
@@ -100,12 +111,13 @@ form {
 
 
 .table {
+  background-color: red;
   font-size: 0.8rem;
   box-sizing: border-box;
 width: 1212px;
-height: 750px;
 border: 3px solid white;
 border-radius: 20px;
+
 }
 
 th {
@@ -122,6 +134,7 @@ width: 671px;
 height: 30px;
 border: 1px solid #FFFFFF;
 border-radius: 5px;
+background-color: black;
 }
 
 .filter__numeric {
