@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../imagem/1.gif.crdownload';
+import logo from '../imagem/2.jpg';
 
 export default function Header() {
   return (
