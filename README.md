@@ -1,4 +1,4 @@
-#<h1>Star Wars Planets Search</h1>
+<h1>Star Wars Planets Search</h1>
 <p>Este é um projeto para listar planetas do universo Star Wars usando React, Context API e Hooks para gerenciar estados globais.</p>
 <h2>Habilidades utilizadas</h2>
 <ul>
